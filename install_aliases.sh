@@ -103,7 +103,19 @@ if test $ansr == "y"; then
             
     fi 
 
-    reade -Q "GREEN" -i "y" -p "Set to rm (remove) to always be verbose? [Y/n]: " "n" rm_verb
+    if type eza &>/dev/null; then
+        reade -Q "GREEN" -i "y" -p "Set ls (list items directory) to 'eza'? [Y/n]: " "n" eza_verb
+        if test $eza_verb == 'y'; then
+            reade -Q "GREEN" -i "y" -p "Add '--icons' as an option? [Y/n]: " "n" eza_icon
+            ezalias="eza"
+            if test $eza_icon == 'y'; then
+                ezalias=$ezalias" --icons" 
+            fi
+            sed -i 's|.*alias ls=".*|alias ls="'"$ezalias"'"|g' $genr  
+        fi
+    fi
+
+    reade -Q "GREEN" -i "y" -p "Set rm (remove) to always be verbose? [Y/n]: " "n" rm_verb
      
     prompt="${green}    - Force copy, recursively delete given directories (enable deletion of direction without deleting every file in directory first) and ${bold}always give at least one prompt before removing?${normal}${green}
     - Force copy, ${YELLOW}don't${normal}${green} recursively look for files and give a prompt not always, but if removing 3 or more files/folder?

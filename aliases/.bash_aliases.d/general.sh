@@ -279,7 +279,7 @@ alias mv="mv-trash -v"
 
 # rm recursively and verbose
 
-alias rm="rm --verbose -r --interactive=once"
+alias rm="rm-prompt"
 shred_iterates=3
 alias rm-shred="shred -vzn $shred_iterates -u"
 #alias remove="rm"
@@ -290,7 +290,7 @@ alias rm-all-hidden="rm -rv .[!.]* *";
 alias mkdir="mkdir -pv"
 
 #Always output colours for ls, grep and variants
-alias ls="ls --color=always"
+alias ls="eza --icons"
 alias grep='grep --colour=always'
 alias egrep='egrep --colour=always'
 alias fgrep='fgrep --colour=always'

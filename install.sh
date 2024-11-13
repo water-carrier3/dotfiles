@@ -31,6 +31,8 @@ if test -z $SYSTEM_UPDATED; then
     reade -Q "CYAN" -i "y" -p  "Update system? [Y/n]: " "n" updatesysm
     if test $updatesysm == "y"; then
         update-system                     
+    else
+        export SYSTEM_UPDATED="TRUE"
     fi
 fi
 
@@ -252,6 +254,29 @@ else
 fi
 
 
+# Eza prompt
+pre='y'
+othr='n'
+color='GREEN'
+prmpt='[Y/n]: '
+if type eza &> /dev/null; then
+    pre='n' 
+    othr='y'
+    color='YELLOW'
+    prmpt='[N/y]: '
+fi
+
+reade -Q "$color" -i "$pre" -p "Install Eza? (A modern replacement for ls) $prmpt" "$othr" rmp
+if [ -z "$rmp" ] || [ "y" == "$rmp" ]; then
+    if ! test -f install_eza.sh; then
+        eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/install_eza.sh)" 
+    else
+        ./install_eza.sh
+    fi 
+fi
+unset rmp
+
+
 # Rm prompt
 pre='y'
 othr='n'
@@ -264,7 +289,7 @@ if type rm-prompt &> /dev/null; then
     prmpt='[N/y]: '
 fi
 
-reade -Q "GREEN" -i "y" -p "Install rm-prompt? (Rm but lists files/directories before deletion) [Y/n]: " "n" rmp
+reade -Q "$color" -i "$pre" -p "Install rm-prompt? (Rm but lists files/directories before deletion) $prmpt" "$othr" rmp
 if [ -z "$rmp" ] || [ "y" == "$rmp" ]; then
     if ! test -f install_rmprompt.sh; then
         eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/install_rmprompt.sh)" 
@@ -711,7 +736,7 @@ pre='y'
 othr='n'
 color='GREEN'
 prmpt='[Y/n]: '
-if ! type neofetch &> /dev/null && ! type fastfetch &> /dev/null && ! type screenfetch &> /dev/null && ! type onefetch &> /dev/null; then
+if type neofetch &> /dev/null || type fastfetch &> /dev/null || type screenfetch &> /dev/null; then
     pre='n' 
     othr='y'
     color='YELLOW'

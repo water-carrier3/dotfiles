@@ -1095,7 +1095,7 @@ localauth_conf_d	install_polkit_wheel.sh	/^    function localauth_conf_d(){$/;"	
 locales-list-enabled	aliases/.bash_aliases.d/general.sh	/^alias locales-list-enabled="locale -a"$/;"	a
 lower2upper	aliases/.bash_aliases.d/general.sh	/^alias lower2upper="tr '[:lower:]' '[:upper:]'"$/;"	a
 lowfi-play	aliases/.bash_aliases.d/variety.sh	/^    alias lowfi-play="lowfi play"$/;"	a
-ls	aliases/.bash_aliases.d/general.sh	/^alias ls="ls --color=always"$/;"	a
+ls	aliases/.bash_aliases.d/general.sh	/^alias ls="eza --icons"$/;"	a
 lsall	aliases/.bash_aliases.d/general.sh	/^alias lsall="ls -Ahl"$/;"	a
 lsdir	aliases/.bash_aliases.d/general.sh	/^alias lsdir="ls -Ap | grep \\".*\/$\\""$/;"	a
 man-a	vim/.bash_aliases.d/vim_nvim.sh	/^    alias man-a="man-all-nvim"                                                               $/;"	a
@@ -1341,7 +1341,7 @@ right	ranger/.config/ranger/rc.conf	/^cmap <right> eval fm.ui.console.move(right
 ripgrep-dir	fzf/.bash_aliases.d/ripgrep-directory.sh	/^ripgrep-dir() {$/;"	f
 ripgrep_conf	install_ripgrep.sh	/^    function ripgrep_conf(){$/;"	f
 ripgrep_conf_r	install_ripgrep.sh	/^    function ripgrep_conf_r(){$/;"	f
-rm	aliases/.bash_aliases.d/general.sh	/^alias rm="rm --verbose -r --interactive=once"$/;"	a
+rm	aliases/.bash_aliases.d/general.sh	/^alias rm="rm-prompt"$/;"	a
 rm-all-folder	aliases/.bash_aliases.d/general.sh	/^alias rm-all-folder="rm -rv .\/*";$/;"	a
 rm-all-hidden	aliases/.bash_aliases.d/general.sh	/^alias rm-all-hidden="rm -rv .[!.]* *";$/;"	a
 rm-prompt	rm-prmpt/rm-prompt	/^function rm-prompt(){$/;"	f
