@@ -23,14 +23,14 @@ color='GREEN'
 prmpt='[Both/exit/intr/n]: '
 
 echo "Next $(tput setaf 1)sudo$(tput sgr0) will check for terminate background processes /root/.bashrc' "
-if grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill \"\$(jobs -p)\"' .*" ~/.bashrc || sudo grep -q "trap '! [ -z \"\$(jobs -p)\" ] && kill \"\$(jobs -p)\"' .*" /root/.bashrc; then
+if grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p).*" ~/.bashrc || sudo grep -q "trap '! [ -z \"\$(jobs -p)\" ] && kill \"\$(jobs -p)\"' .*" /root/.bashrc; then
     pre='n' 
     othr='both exit intr'
     color='YELLOW'
     prmpt='[N/both/exit/intr]: '
 fi 
 
-reade -Q "$color" -i "$pre" -p "Send kill signal to background processes when exiting (Ctrl-q)/interrupting (Ctrl-c) for $USER? $prmpt" "$othr" int_r
+reade -Q "$color" -i "$pre" -p "Send kill signal to background processes when exiting (Ctrl-q) / interrupting (Ctrl-c) for $USER? $prmpt" "$othr" int_r
 if ! [ $int_r  == "n" ]; then
     if test $int_r == 'both'; then
         sig='INT EXIT'  
@@ -39,19 +39,18 @@ if ! [ $int_r  == "n" ]; then
     elif test $int_r == 'intr'; then
         sig='INT'  
     fi
-    if ! grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill \"\$(jobs -p)\"' .*" ~/.bashrc; then 
-        printf "trap '! [ -z \"\$(jobs -p)\" ] && kill \"\$(jobs -p)\"' $sig\n" >> ~/.bashrc
-    else  
-        sed -i 's|trap '\''! \[ -z "$(jobs -p)" \] && kill "$(jobs -p)"'\'' .*|trap '\''! [ -z "$(jobs -p)" \] \&\& kill "$(jobs -p)"'\'' '"$sig"'|g' ~/.bashrc 
+    if grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p).*" ~/.bashrc; then 
+        sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(echo $(jobs -p).*/d' ~/.bashrc  
     fi 
-    
+    printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p) | tr \"\\\n\"  \" \")\"' $sig\n" >> ~/.bashrc
+        
     pre='same'
     othr='both exit intr n'
     color='GREEN'
     prmpt='[Same/both/exit/intr/n]: '
     echo "Next $(tput setaf 1)sudo$(tput sgr0) will check for terminate background processes /root/.bashrc' "
      
-    if sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill \"\$(jobs -p)\"' .*" /root/.bashrc; then
+    if sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p).*" /root/.bashrc; then
         pre='n' 
         othr='same both exit intr'
         color='YELLOW'
@@ -67,11 +66,10 @@ if ! [ $int_r  == "n" ]; then
             sig='INT'  
         fi
 
-        if ! sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill \"\$(jobs -p)\"' .*" /root/.bashrc; then 
-            printf "trap '! [ -z \"\$(jobs -p)\" ] && kill \"\$(jobs -p)\"' $sig\n" | sudo tee -a /root/.bashrc &> /dev/null
-        else  
-            sudo sed -i 's|trap '\''! \[ -z "$(jobs -p)" \] && kill "$(jobs -p)"'\'' .*|trap '\''! [ -z "$(jobs -p)" \] \&\& kill "$(jobs -p)"'\'' '"$sig"'|g' /root/.bashrc 
+        if  sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p).*" /root/.bashrc; then 
+            sudo sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(echo $(jobs -p).*/d' /root/.bashrc 
         fi  
+        printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p) | tr \"\\\n\"  \" \")\"' $sig\n" | sudo tee -a /root/.bashrc &> /dev/null
     fi     
 fi
 unset int_r sig
@@ -110,12 +108,12 @@ if test $ansr == "y"; then
             ezalias="eza"
 
             reade -Q "GREEN" -i "y" -p "Add '--header' as an option for 'eza'? (explanation of table content at top) [Y/n]: " "n" eza_hdr
-            if test $eza_hdr== 'y'; then
+            if test $eza_hdr == 'y'; then
                 ezalias=$ezalias" --header" 
             fi
             
             reade -Q "GREEN" -i "y" -p "Always color 'eza' output? [Y/n]: " "n" eza_clr
-            if test $eza_clr== 'y'; then
+            if test $eza_clr == 'y'; then
                 ezalias=$ezalias" --color=always" 
             fi
              

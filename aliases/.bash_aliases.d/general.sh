@@ -290,7 +290,7 @@ alias rm-all-hidden="rm -rv .[!.]* *";
 alias mkdir="mkdir -pv"
 
 #Always output colours for ls, grep and variants
-alias ls="eza --color=always --icons"
+alias ls="eza --header --color=always --icons"
 alias grep='grep --colour=always'
 alias egrep='egrep --colour=always'
 alias fgrep='fgrep --colour=always'

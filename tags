@@ -833,6 +833,8 @@ ext py	ranger/.config/ranger/rifle.conf	/^ext py  = python -- "$1"$/;"	k
 ext rb	ranger/.config/ranger/rifle.conf	/^ext rb  = ruby -- "$1"$/;"	k
 ext sh	ranger/.config/ranger/rifle.conf	/^ext sh  = sh -- "$1"$/;"	k
 extract-archive	aliases/.bash_aliases.d/general.sh	/^extract-archive(){  $/;"	f
+eza	aliases/.bash_aliases.d/general.sh	/^    alias eza="eza --color=always --header --icons" $/;"	a
+eza-git	aliases/.bash_aliases.d/general.sh	/^    alias eza-git="eza --long --git-repos --header --git" $/;"	a
 fd	aliases/.bash_aliases.d/find.sh	/^type fd &> \/dev\/null && alias fd='fd --color=always'$/;"	a
 ferdium	aliases/.bash_aliases.d/flatpacks.sh	/^    alias ferdium='GDK_BACKEND=x11 \/usr\/bin\/flatpak run --branch=stable --arch=x86_64 --comma/;"	a
 ferdium	flatpak/.bash_aliases.d/flatpacks.sh	/^    alias ferdium='GDK_BACKEND=x11 \/usr\/bin\/flatpak run --branch=stable --arch=x86_64 --comma/;"	a
@@ -1095,9 +1097,16 @@ localauth_conf_d	install_polkit_wheel.sh	/^    function localauth_conf_d(){$/;"	
 locales-list-enabled	aliases/.bash_aliases.d/general.sh	/^alias locales-list-enabled="locale -a"$/;"	a
 lower2upper	aliases/.bash_aliases.d/general.sh	/^alias lower2upper="tr '[:lower:]' '[:upper:]'"$/;"	a
 lowfi-play	aliases/.bash_aliases.d/variety.sh	/^    alias lowfi-play="lowfi play"$/;"	a
-ls	aliases/.bash_aliases.d/general.sh	/^alias ls="eza --icons"$/;"	a
-lsall	aliases/.bash_aliases.d/general.sh	/^alias lsall="ls -Ahl"$/;"	a
-lsdir	aliases/.bash_aliases.d/general.sh	/^alias lsdir="ls -Ap | grep \\".*\/$\\""$/;"	a
+ls	aliases/.bash_aliases.d/general.sh	/^alias ls="eza --header --color=always --icons"$/;"	a
+ls-all	aliases/.bash_aliases.d/general.sh	/^    alias ls-all="eza -A --long --git --header"$/;"	a
+ls-all	aliases/.bash_aliases.d/general.sh	/^alias ls-all="ls -Ahl"$/;"	a
+ls-dirs	aliases/.bash_aliases.d/general.sh	/^    alias ls-dirs="eza -A --only-dirs" $/;"	a
+ls-dirs	aliases/.bash_aliases.d/general.sh	/^alias ls-dirs="ls -Ahp | grep \\".*\/$\\""$/;"	a
+ls-dirtop	aliases/.bash_aliases.d/general.sh	/^    alias ls-dirtop="eza --group-directories-first"$/;"	a
+ls-dirtop	aliases/.bash_aliases.d/general.sh	/^alias ls-dirtop="ls --group-directories-first"$/;"	a
+ls-files	aliases/.bash_aliases.d/general.sh	/^    alias ls-files="eza -A --only-files"$/;"	a
+ls-files	aliases/.bash_aliases.d/general.sh	/^alias ls-files="ls -Ahp | grep -v \/"$/;"	a
+ls-git	aliases/.bash_aliases.d/general.sh	/^    alias ls-git="eza-git"$/;"	a
 man-a	vim/.bash_aliases.d/vim_nvim.sh	/^    alias man-a="man-all-nvim"                                                               $/;"	a
 man-all	vim/.bash_aliases.d/vim_nvim.sh	/^    alias man-all="man-all-nvim"                                                               $/;"	a
 man-all-nvim	vim/.bash_aliases.d/vim_nvim.sh	/^    function man-all-nvim() {                                                               $/;"	f
@@ -1320,6 +1329,10 @@ readline	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vi
 receive-mails-csv-file	aliases/.bash_aliases.d/gpg.sh	/^function receive-mails-csv-file(){$/;"	f
 receive-mails-csv-file	gpg/.bash_aliases.d/gpg.sh	/^function receive-mails-csv-file(){$/;"	f
 redirect-tty-output-to	aliases/.bash_aliases.d/general.sh	/^alias redirect-tty-output-to="exec 1>\/dev\/pts\/"$/;"	a
+refresh	aliases/.bash_aliases.d/general.sh	/^alias refresh="watch -n0 --color bash -ic"$/;"	a
+refresh	aliases/.bash_aliases.d/general.sh	/^type viddy &> \/dev\/null && alias refresh="viddy --interval 0.1 --disable_auto_save --shell-opt/;"	a
+refresh-diff	aliases/.bash_aliases.d/general.sh	/^alias refresh-diff="watch -n0 -d --color bash -ic"$/;"	a
+refresh-diff	aliases/.bash_aliases.d/general.sh	/^type viddy &> \/dev\/null && alias refresh="viddy --interval 0.1 --disable_auto_save --shell-opt/;"	a
 refresh_rate	neofetch/.config/neofetch/config.conf	/^refresh_rate="on"$/;"	k
 regenerate-initrams-all-kernels	aliases/.bash_aliases.d/general.sh	/^alias regenerate-initrams-all-kernels="sudo mkinitcpio -P"$/;"	a
 remove-empty-lines	aliases/.bash_aliases.d/general.sh	/^alias remove-empty-lines="sed '\/^[[:space:]]*$\/d'"$/;"	a
