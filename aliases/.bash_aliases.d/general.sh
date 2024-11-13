@@ -290,7 +290,7 @@ alias rm-all-hidden="rm -rv .[!.]* *";
 alias mkdir="mkdir -pv"
 
 #Always output colours for ls, grep and variants
-alias ls="eza --icons"
+alias ls="eza --color=always --icons"
 alias grep='grep --colour=always'
 alias egrep='egrep --colour=always'
 alias fgrep='fgrep --colour=always'
@@ -308,6 +308,14 @@ alias no-error="2> /dev/null"
 alias all-null="&> /dev/null"
 alias no-output="&> /dev/null"
 
+# Refresh output command every 0.1s
+alias refresh="watch -n0 --color bash -ic"
+alias refresh-diff="watch -n0 -d --color bash -ic"
+complete -F _commands refresh refresh-diff
+
+type viddy &> /dev/null && alias refresh="viddy --interval 0.1 --disable_auto_save --shell-options '--login' -- " && alias refresh-diff="viddy -D --interval 0.1 --disable_auto_save --shell-options '--login' -- " && complete -F _commands viddy
+
+
 # Show open ports
 #alias openports='netstat -nape --inet'
 
@@ -317,11 +325,28 @@ if type nmcli &> /dev/null; then
     alias wifi-disable='nmcli radio wifi off'
 fi
 
+# List directories first
+alias ls-dirtop="ls --group-directories-first"
+
 # Listen hidden files and permissions
-alias lsall="ls -Ahl"
+alias ls-all="ls -Ahl"
+
+# Listen only files, including that are hidden 
+alias ls-files="ls -Ahp | grep -v /"
 
 # Listen only directories, including that are hidden
-alias lsdir="ls -Ap | grep \".*/$\""
+alias ls-dirs="ls -Ahp | grep \".*/$\""
+
+if type eza &> /dev/null; then
+    alias eza="eza --color=always --header --icons" 
+    alias ls-dirtop="eza --group-directories-first"
+    alias ls-all="eza -A --long --git --header"
+    alias ls-files="eza -A --only-files"
+    alias ls-dirs="eza -A --only-dirs" 
+    alias eza-git="eza --long --git-repos --header --git" 
+    alias ls-git="eza-git"
+fi
+
 alias q='exit'
 #alias q='! test -z jobs && kill -2 "$(jobs -p)" && reade -Q "GREEN" -i "y" -p "Jobs are still running in the background. Send interrupt signal (kill)?: " "n" kill_ && test "$kill_" == "y" && kill "$(jobs -p)" && exit || kill -18 "$(jobs -p)" || exit'
 alias d="dirs"

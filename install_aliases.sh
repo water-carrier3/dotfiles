@@ -106,12 +106,26 @@ if test $ansr == "y"; then
     if type eza &>/dev/null; then
         reade -Q "GREEN" -i "y" -p "Set ls (list items directory) to 'eza'? [Y/n]: " "n" eza_verb
         if test $eza_verb == 'y'; then
-            reade -Q "GREEN" -i "y" -p "Add '--icons' as an option? [Y/n]: " "n" eza_icon
+
             ezalias="eza"
+
+            reade -Q "GREEN" -i "y" -p "Add '--header' as an option for 'eza'? (explanation of table content at top) [Y/n]: " "n" eza_hdr
+            if test $eza_hdr== 'y'; then
+                ezalias=$ezalias" --header" 
+            fi
+            
+            reade -Q "GREEN" -i "y" -p "Always color 'eza' output? [Y/n]: " "n" eza_clr
+            if test $eza_clr== 'y'; then
+                ezalias=$ezalias" --color=always" 
+            fi
+             
+            reade -Q "GREEN" -i "y" -p "Add filetype/directory icons for all the found items in 'eza'? [Y/n]: " "n" eza_icon
             if test $eza_icon == 'y'; then
                 ezalias=$ezalias" --icons" 
             fi
+              
             sed -i 's|.*alias ls=".*|alias ls="'"$ezalias"'"|g' $genr  
+            unset ezalias eza_clr eza_hdr eza_icon 
         fi
     fi
 

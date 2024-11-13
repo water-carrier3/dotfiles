@@ -271,7 +271,7 @@ bind -m emacs-standard '"\C-o": vi-editing-mode'
 # vi-command ' / emacs C-x ' helps with adding quotes to bash strings
 _quote_all() { READLINE_LINE="${READLINE_LINE@Q}"; }
 bind -m emacs-standard -x '"\C-x'\''":_quote_all'
-bind -m vi-command     -x '"'\''":_quote_all'
+bind -m vi-command    -x '"'\''":_quote_all'
 #bind -m vi-insert      -x '"\C-x'\''":_quote_all'
 
 # https://unix.stackexchange.com/questions/85391/where-is-the-bash-feature-to-open-a-command-in-editor-documented
@@ -284,7 +284,7 @@ _edit_wo_executing() {
     #[ "$(sed -n '/^#!\/bin\/bash/p;q' "$tmpf")" ] && sed -i 1d "$tmpf"
     READLINE_LINE="$(<"$tmpf")"
     READLINE_POINT="${#READLINE_LINE}"
-    rm "$tmpf" &> /dev/null
+    command rm "$tmpf" &> /dev/null
 }
 
 bind -m vi-insert      -x '"\C-e":_edit_wo_executing'
