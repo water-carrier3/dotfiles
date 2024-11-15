@@ -1585,7 +1585,11 @@ xterm	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vim-a
 y	vim/.config/nvim/init.vim	/^nnoremap y "+^y$/;"	m
 y	vim/.config/nvim/init.vim	/^vnoremap y "+y$/;"	m
 yay-clear-cache	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-clear-cache="yay -Sc"$/;"	a
+yay-fzf-install	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-install(){ $/;"	f
+yay-fzf-install-by-group	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-install-by-group(){ $/;"	f
 yay-fzf-list-files	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-list-files(){ $/;"	f
+yay-fzf-list-files-installed	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-list-files-installed(){ $/;"	f
+yay-fzf-remove	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-remove(){ $/;"	f
 yay-list-all-aur	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-list-all-aur="yay -Slaq"$/;"	a
 yay-list-groups	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-list-groups="yay -Ssq" $/;"	a
 yay-list-installed	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-list-installed="yay -Q" $/;"	a

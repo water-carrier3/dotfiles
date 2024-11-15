@@ -44,7 +44,7 @@ fzf_rifle(){
     #--bind "start:reload:$RG_PREFIX {q}" \
     #--bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
     #--bind='ctrl-g:change-prompt(Append> )+change-header('\''Append stuff\nCTRL+F to go back'\'')+change-preview(printf "\x1b_Ga=d,d=A\x1b\\"; bat --color=always {1} --highlight-line {2})"' \
-    local fle="$(fzf -m --reverse --height 100% --query "$INITIAL_QUERY" --ansi  --header-first --history="$HOME/.fzf_history" --preview='size=$(kitten icat --print-window-size {})
+    local fle="$(fzf -i -m --reverse --height 100% --query "$INITIAL_QUERY" --ansi  --header-first --history="$HOME/.fzf_history" --preview='size=$(kitten icat --print-window-size {})
         t_mode="memory"
         [[ -n "$SSH_TTY" ]] && t_mode="stream"    
         x_img=$(($(echo $size | cut -d"x" -f 1) / $COLUMNS)); y_img=$(($(echo $size | cut -d"x" -f 2) / "$LINES"));

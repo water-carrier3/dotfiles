@@ -218,6 +218,36 @@ if test $distro_base == 'Debian'; then
     fi 
 
 elif test $distro_base == 'Arch'; then
+
+
+    echo "Next $(tput setaf 1)sudo$(tput sgr0) will check whether colors are enabled for 'pacman'"
+    if sudo grep -q '#Colors' /etc/pacman.conf; then
+        reade -Q 'GREEN' -i 'y' -p "Enable colors for pacman? [Y/n]: " 'n' pacs_col
+        if test $pacs_col == 'y'; then
+            sudo sed -i 's|#Colors|Colors|g' /etc/pacman.conf       
+        fi
+        unset pacs_col 
+    fi
+   
+    if ! type yay &> /dev/null; then
+        printf "${CYAN}yay${normal} is not installed (Pacman wrapper for installing AUR packages, needed for yay-fzf-install)\n"
+        reade -Q "GREEN" -i "y" -p "Install yay? [Y/n]: " "n" insyay
+        if [ "y" == "$insyay" ]; then 
+            if type curl &> /dev/null && ! test -f ../AUR_installers/install_yay.sh; then
+                eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/AUR_installers/install_yay.sh)" 
+            else
+                eval ../AUR_installers/install_yay.sh
+            fi
+            AUR_pac="yay"
+            AUR_up="yay -Syu"
+            AUR_ins="yay -S"
+            AUR_search="yay -Ss"
+            AUR_ls_ins="yay -Q"
+        fi
+        unset insyay
+    fi
+
+
     if test -z "$(eval "$pac_ls_ins pacseek 2> /dev/null")"; then
         printf "${CYAN}pacseek${normal} (A TUI for managing packages from pacman and AUR) is not installed\n"
         reade -Q 'GREEN' -i 'y' -p "Install pacseek? [Y/n]: " 'n' pacs_ins

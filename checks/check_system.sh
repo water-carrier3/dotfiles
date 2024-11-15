@@ -300,24 +300,22 @@ do
             AUR_ins=""
             AUR_search="auracle search"
              
-
         else
-            printf "Your Arch system seems to have no (known) AUR helper installed\n"
-            reade -Q "GREEN" -i "y" -p "Install pikaur ( Pacman wrapper )? [Y/n]: " "n" insyay
+            printf "${CYAN}yay${normal} is not installed (Pacman wrapper for installing AUR packages, needed for yay-fzf-install)\n"
+            reade -Q "GREEN" -i "y" -p "Install yay? [Y/n]: " "n" insyay
             if [ "y" == "$insyay" ]; then 
 
-                if type curl &> /dev/null && ! test -f ../AUR_insers/install_pikaur.sh; then
-                    eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/AUR_insers/install_pikaur.sh)" 
+                if type curl &> /dev/null && ! test -f ../AUR_installers/install_yay.sh; then
+                    eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/AUR_installers/install_yay.sh)" 
                 else
-                    eval ../AUR_insers/install_pikaur.sh
+                    eval ../AUR_installers/install_yay.sh
                 fi
 
-                AUR_pac="pikaur"
-                AUR_up="pikaur -Syu"
-                AUR_ins="pikaur -S"
-                AUR_search="pikaur -Ss"
-                AUR_ls_ins="pikaur -Q"
-                 
+                AUR_pac="yay"
+                AUR_up="yay -Syu"
+                AUR_ins="yay -S"
+                AUR_search="yay -Ss"
+                AUR_ls_ins="yay -Q"
             fi
             unset insyay 
         fi

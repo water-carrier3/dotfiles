@@ -2,7 +2,7 @@
 type fd &> /dev/null && alias fd='fd --color=always'
 
 tree=''
-type tree &> /dev/null  && tree=' | tree '
+type tree &> /dev/null && tree=' | tree '
 
 if type fd &> /dev/null; then
     alias list-dir-symlinks="fd --search-path . --type symlink $tree | $PAGER"
