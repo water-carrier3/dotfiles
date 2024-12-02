@@ -11,6 +11,9 @@ if test $machine == 'Windows' && test $win_bash_shell == 'Cygwin'; then
     alias cd-home-="cd /cygdrive/c/Users/$USER"
 fi
 
+
+alias kill-all-jobs="kill -9 \$(jobs -p)"
+
 #source_profile=""
 #if test -z $PROFILE; then
 #    if test -f ~/.profile; then
@@ -42,8 +45,13 @@ fi
 
 # cp recursively, verbose ()
 # cpOld same but no files older are overwritten
-alias cp="cp -rv"
+
 alias cp-old="cp -ruv"
+
+alias cp="xcp --recursive --verbose  --no-clobber --glob --verbose --"
+#alias cp="xcp" 
+#alias cp="cp -rv"
+
 alias copy="cp"
 
 
@@ -211,7 +219,7 @@ function cp-trash(){
     fi
 }
 
-alias cp="cp-trash -rv"
+alias cp="xcp --recursive --verbose  --no-clobber --glob --verbose --"
 
 # mv (recursively native) verbose and only ask for interaction when overwriting newer files
 
@@ -290,7 +298,8 @@ alias rm-all-hidden="rm -rv .[!.]* *";
 alias mkdir="mkdir -pv"
 
 #Always output colours for ls, grep and variants
-alias ls="eza --header --color=always --icons"
+alias ls="ls --color=always"
+#alias ls="eza --header --color=always --icons"
 alias grep='grep --colour=always'
 alias egrep='egrep --colour=always'
 alias fgrep='fgrep --colour=always'
@@ -325,6 +334,12 @@ if type nmcli &> /dev/null; then
     alias wifi-disable='nmcli radio wifi off'
 fi
 
+# Bios-version + Motherboard
+alias bios-version="sudo dmidecode -t 0"
+alias motherboard="sudo dmidecode -t 1"
+alias mobo="sudo dmidecode -t 1"
+
+
 # List directories first
 alias ls-dirtop="ls --group-directories-first"
 
@@ -338,7 +353,7 @@ alias ls-files="ls -Ahp | grep -v /"
 alias ls-dirs="ls -Ahp | grep \".*/$\""
 
 if type eza &> /dev/null; then
-    alias eza="eza --color=always --header --icons" 
+    alias eza="eza --color=always --header --icons always" 
     alias ls-dirtop="eza --group-directories-first"
     alias ls-all="eza -A --long --git --header"
     alias ls-files="eza -A --only-files"
@@ -620,12 +635,8 @@ function add-to-group() {
 
 complete -F _groups add_to_group
 
-function set-user-executable() {
-    if [[ ! -f $1 ]] ; then
-        echo "Give a file to set as an executable";
-    else
-        sudo chmod u+x $1;
-    fi; }
+alias executable="sudo chmod +x"
+alias executable-user="sudo chmod u+x"
 
 complete -F _files mark_user_executable
 

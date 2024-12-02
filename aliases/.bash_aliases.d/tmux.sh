@@ -1,0 +1,1 @@
+../dotfiles/tmux/.bash_aliases.d/tmux.sh

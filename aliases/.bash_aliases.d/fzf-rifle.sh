@@ -1,0 +1,1 @@
+/home/burp/dotfiles/fzf/.bash_aliases.d/fzf-rifle.sh

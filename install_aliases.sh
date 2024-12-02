@@ -39,10 +39,10 @@ if ! [ $int_r  == "n" ]; then
     elif test $int_r == 'intr'; then
         sig='INT'  
     fi
-    if grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p).*" ~/.bashrc; then 
-        sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(echo $(jobs -p).*/d' ~/.bashrc  
+    if grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p*" ~/.bashrc; then 
+        sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(jobs -p.*/d' ~/.bashrc  
     fi 
-    printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p) | tr \"\\\n\"  \" \")\"' $sig\n" >> ~/.bashrc
+    printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p | tr \"\\\n\"  \" \")\"' $sig\n" >> ~/.bashrc
         
     pre='same'
     othr='both exit intr n'
@@ -50,7 +50,7 @@ if ! [ $int_r  == "n" ]; then
     prmpt='[Same/both/exit/intr/n]: '
     echo "Next $(tput setaf 1)sudo$(tput sgr0) will check for terminate background processes /root/.bashrc' "
      
-    if sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p).*" /root/.bashrc; then
+    if sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p.*" /root/.bashrc; then
         pre='n' 
         othr='same both exit intr'
         color='YELLOW'
@@ -66,10 +66,10 @@ if ! [ $int_r  == "n" ]; then
             sig='INT'  
         fi
 
-        if  sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p).*" /root/.bashrc; then 
-            sudo sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(echo $(jobs -p).*/d' /root/.bashrc 
+        if  sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p).*" /root/.bashrc; then 
+            sudo  sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(jobs -p.*/d' /root/.bashrc 
         fi  
-        printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(echo \$(jobs -p) | tr \"\\\n\"  \" \")\"' $sig\n" | sudo tee -a /root/.bashrc &> /dev/null
+        printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p | tr \"\\\n\"  \" \")\"' $sig\n" | sudo tee -a /root/.bashrc &> /dev/null
     fi     
 fi
 unset int_r sig
@@ -88,21 +88,21 @@ if test $ansr == "y"; then
         sed -i 's|^export TRASH_BIN_LIMIT=|export TRASH_BIN_LIMIT=|g' ~/.environment.env
     fi
 
-    if type gio &> /dev/null; then 
-        reade -Q "GREEN" -i "y" -p "Set cp/mv (when overwriting) to backup files? (will also trash backups) [Y/n]: " "n" ansr         
-        if [ "$ansr" != "y" ]; then
-            sed -i 's|^alias cp="cp-trash -rv"|#alias cp="cp-trash -rv"|g' $genr
-            sed -i 's|^alias mv="mv-trash -v"|#alias mv="mv-trash -v"|g' $genr
-        else
-            sed -i 's|.*alias cp="cp-trash -rv"|alias cp="cp-trash -rv"|g' $genr
-            sed -i 's|.*alias mv="mv-trash -v"|alias mv="mv-trash -v"|g' $genr
-        fi
-        unset ansr
-            
-    fi 
+    #if type gio &> /dev/null; then 
+    #    reade -Q "GREEN" -i "y" -p "Set cp/mv (when overwriting) to backup files? (will also trash backups) [Y/n]: " "n" ansr         
+    #    if [ "$ansr" != "y" ]; then
+    #        sed -i 's|^alias cp="cp-trash -rv"|#alias cp="cp-trash -rv"|g' $genr
+    #        sed -i 's|^alias mv="mv-trash -v"|#alias mv="mv-trash -v"|g' $genr
+    #    else
+    #        sed -i 's|.*alias cp="cp-trash -rv"|alias cp="cp-trash -rv"|g' $genr
+    #        sed -i 's|.*alias mv="mv-trash -v"|alias mv="mv-trash -v"|g' $genr
+    #    fi
+    #    unset ansr
+    #        
+    #fi 
 
     if type eza &>/dev/null; then
-        reade -Q "GREEN" -i "y" -p "Set ls (list items directory) to 'eza'? [Y/n]: " "n" eza_verb
+        reade -Q "GREEN" -i "y" -p "${CYAN}eza${GREEN} installed. Set ls (list items directory) to 'eza'? [Y/n]: " "n" eza_verb
         if test $eza_verb == 'y'; then
 
             ezalias="eza"
@@ -127,10 +127,53 @@ if test $ansr == "y"; then
         fi
     fi
 
+        reade -Q 'GREEN' -i 'y' -p "Set cp alias? [Y/n]: " 'n' cp_all
+
+        if type xcp &> /dev/null; then 
+            reade -Q 'GREEN' -i 'y' -p "${CYAN}xcp${GREEN} installed. Use xcp instead of cp? [Y/n]: " 'n' cp_xcp
+            if test $cp_xcp == 'y'; then
+                cp_xcp='xcp --glob ' 
+            else
+                cp_xcp="cp" 
+            fi
+ 
+            reade -Q 'GREEN' -i 'y' -p "Be recursive? (Recursive means copy everything inside directories without aborting) [Y/n]: " 'n' cp_r
+            if test "$cp_r" == 'y'; then
+                cp_r='--recursive ' 
+            else
+                cp_r="" 
+            fi 
+            reade -Q 'GREEN' -i 'y' -p "Be verbose? (All info about copying process) [Y/n]: " 'n' cp_v
+            if test "$cp_v" == 'y'; then
+                cp_v='--verbose ' 
+            else
+                cp_v="" 
+            fi
+
+            reade -Q 'YELLOW' -i 'n' -p "Never overwrite already present files? [N/y]: " 'y' cp_ov
+            if test $cp_ov == 'y'; then
+                cp_ov='--no-clobber ' 
+            else
+                cp_ov="" 
+            fi
+            
+            reade -Q 'GREEN' -i 'y' -p "Lookup files/directories of symlinks? [Y/n]: " 'n' cp_der
+            if test $cp_der == 'y'; then
+                cp_der='--dereference ' 
+            else
+                cp_der="" 
+            fi
+             
+
+            sed -i 's|^alias cp=".*|alias cp="'"$cp_xcp $cp_r $cp_v $cp_ov $cp_der"' --"|g' $genr
+
+            unset cp_all cp_xcp cp_v cp_ov   
+    fi 
+     
     reade -Q "GREEN" -i "y" -p "Set rm (remove) to always be verbose? [Y/n]: " "n" rm_verb
      
-    prompt="${green}    - Force copy, recursively delete given directories (enable deletion of direction without deleting every file in directory first) and ${bold}always give at least one prompt before removing?${normal}${green}
-    - Force copy, ${YELLOW}don't${normal}${green} recursively look for files and give a prompt not always, but if removing 3 or more files/folder?
+    prompt="${green}    - Force remove, recursively delete given directories (enable deletion of direction without deleting every file in directory first) and ${bold}always give at least one prompt before removing?${normal}${green}
+    - Force remove, ${YELLOW}don't${normal}${green} recursively look for files and give a prompt not always, but if removing 3 or more files/folder?
     - Recursively look without a prompt?${normal}\n" 
     prompt2="Rm = [Recur-prompt/none/prompt/recur"       
     pre="recur-prompt" 
