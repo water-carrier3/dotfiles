@@ -498,9 +498,11 @@ if type pacman &> /dev/null; then
 
     if type yay &> /dev/null; then
         alias yay-update="yay -Su"
+        alias yay-install="yay -Su"
         alias yay-update-yes="yes | yay -Su"
+        alias yay-remove="yay -R"
         alias yay-list-installed="yay -Q" 
-        alias yay-list-groups="yay -Ssq" 
+        #alias yay-list-groups="yay -Ssq" 
         alias yay-list-all-aur="yay -Slaq"
         alias yay-clear-cache="yay -Sc"
 
