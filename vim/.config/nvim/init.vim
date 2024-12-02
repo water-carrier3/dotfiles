@@ -843,14 +843,14 @@ inoremap <silent><C-S-Tab> <C-\><C-o>:bprev<cr>
 vnoremap <silent><C-S-Tab> <esc>:bprev<cr>
 
 " Open Horizontal buffer
-nnoremap <silent><C-w>h :split<cr>
-inoremap <silent><C-w>h <C-\><C-o>:split<cr>
-vnoremap <silent><C-w>h <esc>:split<cr>gv
+nnoremap <silent><C-x><Down> :split<cr>
+inoremap <silent><C-x><Down> <C-\><C-o>:split<cr>
+vnoremap <silent><C-x><Down> <esc>:split<cr>gv
 
 "" Open Vertical buffer
-"nnoremap <S-A-Down> :vertical sb
-"inoremap <S-A-Down> <C-\><C-o>:vertical sb
-"vnoremap <S-A-Down> <esc>:vertical sb
+nnoremap <silent><C-x><Down> :vertical sb<cr>
+inoremap <silent><C-x><Down> <C-\><C-o>:split<cr>
+vnoremap <silent><C-x><Down> <esc>:split<cr>gv
 
 
 " Choose pane
@@ -1249,22 +1249,21 @@ if (!has('nvim') && !has('clipboard_working'))
     augroup END
 endif
 
-"nnoremap <C-c>  "+^yg_ 
-nnoremap <silent><C-c> ^<Plug>OSCYankOperator_
+nnoremap <silent><C-c> "+^y_
 nnoremap <silent><C-v> "+Pl
 nnoremap <C-d>  (col(".") ==? 1 ? '<C-\><C-o>daw' : '<C-\><C-o>diw')
 
 """ Copy inner word except when on first line (copy a word)
 "inoremap <expr> <C-c>   (col(".") ==? 1 ? '<C-\><C-o>"+yaw' : '<C-\><C-o>"+yiw')
 " Copy entire line
-inoremap <silent><C-c>   <C-\><C-o>^<C-\><C-o><Plug>OSCYankOperator_
+inoremap <silent><C-c>   <C-\><C-o>"+<C-\><C-o>ywg
 "" Paste with P if at beginning of line
 inoremap <silent> <C-v> <C-\><C-o>"+P
 "" Cut with a word instead of inner word if at beginning of line
 inoremap <expr> <C-d>   (col(".") ==? 1 ? '<C-\><C-o>daw' : '<C-\><C-o>diw')
 
 "vnoremap <C-c>  "+y
-vnoremap <C-c> <Plug>OSCYankVisual
+vnoremap <C-c> "+y
 vnoremap <silent> <C-v> "+Pl
 vnoremap <C-d>  d 
 

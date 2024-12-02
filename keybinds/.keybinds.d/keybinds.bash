@@ -27,6 +27,7 @@ stty stop 'undef'
 # stty rprnt 'undef'
 
 # Unset quoted insert from (Default C-v) 
+#stty lnext '^X'
 stty lnext 'undef'
 
 # Unset suspend signal shortcut (Default Ctrl+z)

@@ -229,9 +229,9 @@ $NVIM_TUI_ENABLE_TRUE_COLOR	vim/.config/nvim/init.vim	/^let $NVIM_TUI_ENABLE_TRU
 <C-a>	vim/.config/nvim/init.vim	/^nnoremap <C-a> i$/;"	m
 <C-a>	vim/.config/nvim/init.vim	/^vnoremap <C-a> i$/;"	m
 <C-c>	vim/.config/nvim/init.vim	/^cnoremap <C-c> <C-f>$/;"	m
-<C-c>	vim/.config/nvim/init.vim	/^inoremap <silent><C-c>   <C-\\><C-o>^<C-\\><C-o><Plug>OSCYankOperator_$/;"	m
-<C-c>	vim/.config/nvim/init.vim	/^nnoremap <silent><C-c> ^<Plug>OSCYankOperator_$/;"	m
-<C-c>	vim/.config/nvim/init.vim	/^vnoremap <C-c> <Plug>OSCYankVisual$/;"	m
+<C-c>	vim/.config/nvim/init.vim	/^inoremap <silent><C-c>   <C-\\><C-o>"+<C-\\><C-o>ywg$/;"	m
+<C-c>	vim/.config/nvim/init.vim	/^nnoremap <silent><C-c> "+^y_$/;"	m
+<C-c>	vim/.config/nvim/init.vim	/^vnoremap <C-c> "+y$/;"	m
 <C-d>	vim/.config/nvim/init.vim	/^inoremap <expr> <C-d>   (col(".") ==? 1 ? '<C-\\><C-o>daw' : '<C-\\><C-o>diw')$/;"	m
 <C-d>	vim/.config/nvim/init.vim	/^nnoremap <C-d>  (col(".") ==? 1 ? '<C-\\><C-o>daw' : '<C-\\><C-o>diw')$/;"	m
 <C-d>	vim/.config/nvim/init.vim	/^vnoremap <C-d>  d $/;"	m
@@ -265,9 +265,10 @@ $NVIM_TUI_ENABLE_TRUE_COLOR	vim/.config/nvim/init.vim	/^let $NVIM_TUI_ENABLE_TRU
 <C-v>	vim/.config/nvim/init.vim	/^inoremap <silent> <C-v> <C-\\><C-o>"+P$/;"	m
 <C-v>	vim/.config/nvim/init.vim	/^nnoremap <silent><C-v> "+Pl$/;"	m
 <C-v>	vim/.config/nvim/init.vim	/^vnoremap <silent> <C-v> "+Pl$/;"	m
-<C-w>h	vim/.config/nvim/init.vim	/^inoremap <silent><C-w>h <C-\\><C-o>:split<cr>$/;"	m
-<C-w>h	vim/.config/nvim/init.vim	/^nnoremap <silent><C-w>h :split<cr>$/;"	m
-<C-w>h	vim/.config/nvim/init.vim	/^vnoremap <silent><C-w>h <esc>:split<cr>gv$/;"	m
+<C-x><Down>	vim/.config/nvim/init.vim	/^inoremap <silent><C-x><Down> <C-\\><C-o>:split<cr>$/;"	m
+<C-x><Down>	vim/.config/nvim/init.vim	/^nnoremap <silent><C-x><Down> :split<cr>$/;"	m
+<C-x><Down>	vim/.config/nvim/init.vim	/^nnoremap <silent><C-x><Down> :vertical sb<cr>$/;"	m
+<C-x><Down>	vim/.config/nvim/init.vim	/^vnoremap <silent><C-x><Down> <esc>:split<cr>gv$/;"	m
 <C-z>	vim/.config/nvim/init.vim	/^inoremap <C-z> <C-\\><C-o>:u<CR>$/;"	m
 <C-z>	vim/.config/nvim/init.vim	/^nnoremap <C-z> u$/;"	m
 <C-z>	vim/.config/nvim/init.vim	/^vnoremap <C-z> u $/;"	m
@@ -343,7 +344,6 @@ $NVIM_TUI_ENABLE_TRUE_COLOR	vim/.config/nvim/init.vim	/^let $NVIM_TUI_ENABLE_TRU
 <leader>rn	vim/.config/nvim/init.vim	/^    nmap <leader>rn <Plug>(coc-rename)$/;"	m
 <space>	vim/.config/nvim/init.vim	/^nnoremap <space> i<space><esc><Right>$/;"	m
 AUR-fzf-list-website	aliases/.bash_aliases.d/package_managers.sh	/^        function AUR-fzf-list-website(){$/;"	f
-AUR-fzf-packages	aliases/.bash_aliases.d/package_managers.sh	/^        function AUR-fzf-packages(){$/;"	f
 C	vim/.config/nvim/init.vim	/^nnoremap C "+Y$/;"	m
 C	vim/.config/nvim/init.vim	/^vnoremap C "+Y$/;"	m
 CC	vim/.config/nvim/init.vim	/^nnoremap CC "+0Yg_$/;"	m
@@ -1245,6 +1245,7 @@ pacman-create-default-mirrors-and-refresh	aliases/.bash_aliases.d/package_manage
 pacman-forcerefresh-update	aliases/.bash_aliases.d/package_managers.sh	/^    alias pacman-forcerefresh-update="sudo pacman -Syyu"$/;"	a
 pacman-fzf-install	aliases/.bash_aliases.d/package_managers.sh	/^        function pacman-fzf-install(){ $/;"	f
 pacman-fzf-install-by-group	aliases/.bash_aliases.d/package_managers.sh	/^        function pacman-fzf-install-by-group(){ $/;"	f
+pacman-fzf-list-files-installed	aliases/.bash_aliases.d/package_managers.sh	/^        function pacman-fzf-list-files-installed(){ $/;"	f
 pacman-fzf-remove	aliases/.bash_aliases.d/package_managers.sh	/^        function pacman-fzf-remove(){ $/;"	f
 pacman-install	aliases/.bash_aliases.d/package_managers.sh	/^    alias pacman-install="sudo pacman -S"$/;"	a
 pacman-list-AUR-installed	aliases/.bash_aliases.d/package_managers.sh	/^    alias pacman-list-AUR-installed="pacman -Qm"$/;"	a
@@ -1586,13 +1587,11 @@ y	vim/.config/nvim/init.vim	/^nnoremap y "+^y$/;"	m
 y	vim/.config/nvim/init.vim	/^vnoremap y "+y$/;"	m
 yay-clear-cache	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-clear-cache="yay -Sc"$/;"	a
 yay-fzf-install	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-install(){ $/;"	f
-yay-fzf-install-by-group	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-install-by-group(){ $/;"	f
-yay-fzf-list-files	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-list-files(){ $/;"	f
-yay-fzf-list-files-installed	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-list-files-installed(){ $/;"	f
 yay-fzf-remove	aliases/.bash_aliases.d/package_managers.sh	/^        function yay-fzf-remove(){ $/;"	f
+yay-install	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-install="yay -Su"$/;"	a
 yay-list-all-aur	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-list-all-aur="yay -Slaq"$/;"	a
-yay-list-groups	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-list-groups="yay -Ssq" $/;"	a
 yay-list-installed	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-list-installed="yay -Q" $/;"	a
+yay-remove	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-remove="yay -R"$/;"	a
 yay-update	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-update="yay -Su"$/;"	a
 yay-update-yes	aliases/.bash_aliases.d/package_managers.sh	/^        alias yay-update-yes="yes | yay -Su"$/;"	a
 yes_edit_no	aliases/.bash_aliases.d/00-rlwrap_scripts.sh	/^function yes_edit_no(){$/;"	f
