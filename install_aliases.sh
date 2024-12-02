@@ -5,13 +5,13 @@ else
 fi
 
 if ! test -f aliases/.bash_aliases.d/00-rlwrap_scripts.sh; then
-     eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/00-rlwrap_scripts.sh)" 
+     eval "$(curl -fsSL https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/00-rlwrap_scripts.sh)" 
 else
     . ./aliases/.bash_aliases.d/00-rlwrap_scripts.sh
 fi
 
 if ! test -f checks/check_aliases_dir.sh; then
-     eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/checks/check_aliases_dir.sh)" 
+     eval "$(curl -fsSL https://raw.githubusercontent.com/excited-bore/dotfiles/main/checks/check_aliases_dir.sh)" 
 else
     . checks/check_aliases_dir.sh
 fi
@@ -50,7 +50,7 @@ if ! [ $int_r  == "n" ]; then
     prmpt='[Same/both/exit/intr/n]: '
     echo "Next $(tput setaf 1)sudo$(tput sgr0) will check for terminate background processes /root/.bashrc' "
      
-    if sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p).*" /root/.bashrc; then
+    if sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p.*" /root/.bashrc; then
         pre='n' 
         othr='same both exit intr'
         color='YELLOW'
@@ -67,7 +67,7 @@ if ! [ $int_r  == "n" ]; then
         fi
 
         if  sudo grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p).*" /root/.bashrc; then 
-            sudo sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(jobs -p).*/d' /root/.bashrc 
+            sudo  sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(jobs -p.*/d' /root/.bashrc 
         fi  
         printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p | tr \"\\\n\"  \" \")\"' $sig\n" | sudo tee -a /root/.bashrc &> /dev/null
     fi     
@@ -77,7 +77,7 @@ unset int_r sig
 
 genr=aliases/.bash_aliases.d/general.sh
 if ! test -f aliases/.bash_aliases.d/general.sh; then
-    tmp=$(mktemp) && curl -o $tmp https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/general.sh 
+    tmp=$(mktemp) && curl -o $tmp https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/general.sh 
     genr=$tmp
 fi
 
@@ -102,7 +102,7 @@ if test $ansr == "y"; then
     #fi 
 
     if type eza &>/dev/null; then
-        reade -Q "GREEN" -i "y" -p "Set ls (list items directory) to 'eza'? [Y/n]: " "n" eza_verb
+        reade -Q "GREEN" -i "y" -p "${CYAN}eza${GREEN} installed. Set ls (list items directory) to 'eza'? [Y/n]: " "n" eza_verb
         if test $eza_verb == 'y'; then
 
             ezalias="eza"
@@ -130,7 +130,7 @@ if test $ansr == "y"; then
         reade -Q 'GREEN' -i 'y' -p "Set cp alias? [Y/n]: " 'n' cp_all
 
         if type xcp &> /dev/null; then 
-            reade -Q 'GREEN' -i 'y' -p "Use cp instead of xcp? [Y/n]: " 'n' cp_xcp
+            reade -Q 'GREEN' -i 'y' -p "${CYAN}xcp${GREEN} installed. Use xcp instead of cp? [Y/n]: " 'n' cp_xcp
             if test $cp_xcp == 'y'; then
                 cp_xcp='xcp --glob ' 
             else
@@ -138,19 +138,19 @@ if test $ansr == "y"; then
             fi
  
             reade -Q 'GREEN' -i 'y' -p "Be recursive? (Recursive means copy everything inside directories without aborting) [Y/n]: " 'n' cp_r
-            if test $cp_v == 'y'; then
+            if test "$cp_r" == 'y'; then
                 cp_r='--recursive ' 
             else
                 cp_r="" 
             fi 
             reade -Q 'GREEN' -i 'y' -p "Be verbose? (All info about copying process) [Y/n]: " 'n' cp_v
-            if test $cp_v == 'y'; then
+            if test "$cp_v" == 'y'; then
                 cp_v='--verbose ' 
             else
                 cp_v="" 
             fi
 
-            reade -Q 'GREEN' -i 'y' -p "Never overwrite? [Y/n]: " 'n' cp_ov
+            reade -Q 'YELLOW' -i 'n' -p "Never overwrite already present files? [N/y]: " 'y' cp_ov
             if test $cp_ov == 'y'; then
                 cp_ov='--no-clobber ' 
             else
@@ -166,7 +166,8 @@ if test $ansr == "y"; then
              
 
             sed -i 's|^alias cp=".*|alias cp="'"$cp_xcp $cp_r $cp_v $cp_ov $cp_der"' --"|g' $genr
-    unset cp_all cp_xcp cp_v cp_ov   
+
+            unset cp_all cp_xcp cp_v cp_ov   
     fi 
      
     reade -Q "GREEN" -i "y" -p "Set rm (remove) to always be verbose? [Y/n]: " "n" rm_verb
@@ -244,16 +245,16 @@ ps1=aliases/.bash_aliases.d/PS1_colours.sh
 variti=aliases/.bash_aliases.d/variety.sh
 type python &> /dev/null && pthon=aliases/.bash_aliases.d/python.sh
 if ! test -d aliases/.bash_aliases.d/; then
-    tmp1=$(mktemp) && curl -o $tmp https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/update-system.sh && update_sysm=$tmp1
-    tmp4=$(mktemp) && curl -o $tmp4 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/package_managers.sh && pacmn=$tmp4
-    test $distro == "Manjaro" && tmp7=$(mktemp) && curl -o $tmp7 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/manjaro.sh && manjaro=$tmp7
-    type systemctl &> /dev/null && tmp2=$(mktemp) && curl -o $tmp2 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/systemctl.sh && systemd=$tmp2
-    type sudo &> /dev/null && tmp3=$(mktemp) && curl -o $tmp3 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/sudo.sh && dosu=$tmp3
-    type git &> /dev/null && tmp10=$(mktemp) && curl -o $tmp10 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/git.sh && gits=$tmp5
-    type ssh &> /dev/null && tmp5=$(mktemp) && curl -o $tmp5 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/ssh.sh && sshs=$tmp5
-    tmp6=$(mktemp) && curl -o $tmp6 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/ps1.sh && ps1=$tmp6
-    tmp8=$(mktemp) && curl -o $tmp8 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/variety.sh && variti=$tmp8
-    type python &> /dev/null && tmp9=$(mktemp) && curl -o $tmp9 https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/python.sh && pthon=$tmp9
+    tmp1=$(mktemp) && curl -o $tmp https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/update-system.sh && update_sysm=$tmp1
+    tmp4=$(mktemp) && curl -o $tmp4 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/package_managers.sh && pacmn=$tmp4
+    test $distro == "Manjaro" && tmp7=$(mktemp) && curl -o $tmp7 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/manjaro.sh && manjaro=$tmp7
+    type systemctl &> /dev/null && tmp2=$(mktemp) && curl -o $tmp2 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/systemctl.sh && systemd=$tmp2
+    type sudo &> /dev/null && tmp3=$(mktemp) && curl -o $tmp3 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/sudo.sh && dosu=$tmp3
+    type git &> /dev/null && tmp10=$(mktemp) && curl -o $tmp10 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/git.sh && gits=$tmp5
+    type ssh &> /dev/null && tmp5=$(mktemp) && curl -o $tmp5 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/ssh.sh && sshs=$tmp5
+    tmp6=$(mktemp) && curl -o $tmp6 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/ps1.sh && ps1=$tmp6
+    tmp8=$(mktemp) && curl -o $tmp8 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/variety.sh && variti=$tmp8
+    type python &> /dev/null && tmp9=$(mktemp) && curl -o $tmp9 https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/python.sh && pthon=$tmp9
 fi 
 
 update_sysm_r(){ 

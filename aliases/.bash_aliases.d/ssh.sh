@@ -3,6 +3,8 @@ if ! type reade &> /dev/null && test -f ~/.bash_aliases.d/00-rlwrap_scripts.sh; 
     . ~/.bash_aliases.d/00-rlwrap_scripts.sh
 fi
 
+alias ssh-config="$EDITOR ~/.ssh/config"
+
 user="burp"
 user1=
 user2="root"

@@ -1,20 +1,20 @@
 #!/usr/bin/env bash                            
 
 if ! test -f checks/check_system.sh; then
-     eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/checks/check_system.sh)" 
+     eval "$(curl -fsSL https://raw.githubusercontent.com/excited-bore/dotfiles/main/checks/check_system.sh)" 
 else
     . ./checks/check_system.sh
 fi
 
 if ! test -f checks/check_envvar.sh; then
-     eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/checks/check_envvar.sh)" 
+     eval "$(curl -fsSL https://raw.githubusercontent.com/excited-bore/dotfiles/main/checks/check_envvar.sh)" 
 else
     . ./checks/check_envvar.sh
 fi
 
 
 if ! test -f aliases/.bash_aliases.d/00-rlwrap_scripts.sh; then
-     eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/aliases/.bash_aliases.d/00-rlwrap_scripts.sh)" 
+     eval "$(curl -fsSL https://raw.githubusercontent.com/excited-bore/dotfiles/main/aliases/.bash_aliases.d/00-rlwrap_scripts.sh)" 
 else
     . ./aliases/.bash_aliases.d/00-rlwrap_scripts.sh
 fi
@@ -107,22 +107,25 @@ environment-variables(){
         if test $prof == 'y'; then
             printf "\n[ -f ~/.environment.env ] && source ~/.environment.env\n\n" >> ~/.profile
         fi
+        unset prof
     fi
+    if test -f ~/.bash_profile && ! grep -q "~/.bash_profile" ~/.profile; then
+        reade -Q 'GREEN' -i 'y' -p "Link ~/.bash_profile in ~/.profile? [Y/n]: " 'n' bprof
+        if test $prof == 'y'; then
+            printf "\n[ -f ~/.bash_profile ] && source ~/.bash_profile\n\n" >> ~/.profile
+        fi
+        unset bprof
+    fi
+     
     if test -f ~/.bash_profile; then
         printf "\n${GREEN}Since file ${cyan}$HOME/.bash_profile${green} exists, ${cyan}bash${green} won't source ${magenta}$HOME/.profile${green} natively at login.\n${normal}"
         reade -Q 'GREEN' -i 'prof' -p "Source $HOME/.profile in $HOME/.bash_profile or source $HOME/.environment.env directly in $HOME/.bash_profile? [Prof/path/none]: " 'path none' bash_prof
         if [[ $bash_prof =~ 'prof' ]]; then
-            if grep -q '.bashrc' ~/.bash_profile && ! grep -q "~/.profile" ~/.bash_profile; then
-                sed -i 's|\(\[ -f ~/.bashrc \] && source ~/.bashrc\)|\[ -f \~/.profile \] \&\& source \~/.profile\n\n\1\n|g' ~/.bash_profile
-                sed -i 's|\(\[\[ -f ~/.bashrc \]\] && . ~/.bashrc\)|\[ -f \~/.profile \] \&\& source \~/.profile\n\n\1\n|g' ~/.bash_profile
-            else 
+            if ! grep -q "~/.profile" ~/.bash_profile; then
                 printf "\n[ -f ~/.environment.env ] && source ~/.profile\n\n" >> ~/.bash_profile
             fi
         elif test $bash_prof == 'path'; then
-            if grep -q '.bashrc' ~/.bash_profile && ! grep -q "~/.environment.env" ~/.bash_profile; then
-                sed -i 's|\(\[ -f ~/.bashrc \] && source ~/.bashrc\)|\[ -f \~/.environment.env \] \&\& source \~/.environment.env\n\n\1\n|g' ~/.bash_profile
-                sed -i 's|\(\[\[ -f ~/.bashrc \]\] && . ~/.bashrc\)|\[ -f \~/.environment.env \] \&\& source \~/.environment.env\n\n\1\n|g' ~/.bash_profile
-            else 
+            if ! grep -q "~/.environment.env" ~/.bash_profile; then
                 printf "\n[ -f ~/.environment.env ] && source ~/.environment.env\n\n" >> ~/.bash_profile
             fi
         fi
@@ -151,7 +154,7 @@ environment-variables(){
 
 pathvr=$(pwd)/envvars/.environment.env
 if ! test -f $pathvr; then
-    tmp=$(mktemp) && curl -o $tmp https://raw.githubusercontent.com/water-carrier3/dotfiles/main/envvars/.environment.env
+    tmp=$(mktemp) && curl -o $tmp https://raw.githubusercontent.com/excited-bore/dotfiles/main/envvars/.environment.env
     pathvr=$tmp
 fi
 

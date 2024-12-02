@@ -43,6 +43,11 @@ fi
 
 alias columns="git column --mode=column"
 
+alias git-list-config="git config --list"
+
+alias git-config-username="git config user.name"
+alias git-config-useremail="git config user.email"
+
 alias git-config-pull-rebase-false="git config pull.rebase false"
 alias git-config-global-pull-rebase-false="git config --global pull.rebase false"
 
