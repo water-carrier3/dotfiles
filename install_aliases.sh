@@ -39,10 +39,10 @@ if ! [ $int_r  == "n" ]; then
     elif test $int_r == 'intr'; then
         sig='INT'  
     fi
-    if grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p).*" ~/.bashrc; then 
-        sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(jobs -p).*/d' ~/.bashrc  
+    if grep -q "trap '! \[ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p*" ~/.bashrc; then 
+        sed -i '/trap '\''! \[ -z "$(jobs -p)" \] \&\& kill -9 "$(jobs -p.*/d' ~/.bashrc  
     fi 
-    printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p) | tr \"\\\n\"  \" \")\"' $sig\n" >> ~/.bashrc
+    printf "trap '! [ -z \"\$(jobs -p)\" ] && kill -9 \"\$(jobs -p | tr \"\\\n\"  \" \")\"' $sig\n" >> ~/.bashrc
         
     pre='same'
     othr='both exit intr n'
