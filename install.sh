@@ -306,6 +306,29 @@ if [ -z "$rmp" ] || [ "y" == "$rmp" ]; then
 fi
 unset rmp
 
+# Xcp
+pre='y'
+othr='n'
+color='GREEN'
+prmpt='[Y/n]: '
+if type xcp &> /dev/null; then
+    pre='n' 
+    othr='y'
+    color='YELLOW'
+    prmpt='[N/y]: '
+fi
+
+reade -Q "$color" -i "$pre" -p "Install xcp? (cp but faster and with progress bar) $prmpt" "$othr" rmp
+if [ -z "$rmp" ] || [ "y" == "$rmp" ]; then
+    if ! test -f install_xcp.sh; then
+        eval "$(curl -fsSL https://raw.githubusercontent.com/water-carrier3/dotfiles/main/install_xcp.sh)" 
+    else
+        ./install_xcp.sh
+    fi 
+fi
+unset rmp
+
+
 
 # Rm prompt
 pre='y'

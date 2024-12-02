@@ -52,7 +52,7 @@
 !_TAG_PARSER_VERSION!Vim	0.0	/current.age/
 !_TAG_PARSER_VERSION!Yaml	0.0	/current.age/
 !_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
-!_TAG_PROC_CWD	/home/burp/dotfiles/	//
+!_TAG_PROC_CWD	/home/burp/dotfiles1/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
@@ -644,6 +644,7 @@ bar_length	neofetch/.config/neofetch/config.conf	/^bar_length=15$/;"	k
 bash	ctags/.ctags	/^--langdef=bash$/;"	l
 battery_display	neofetch/.config/neofetch/config.conf	/^battery_display="off"$/;"	k
 bios	aliases/.bash_aliases.d/systemctl.sh	/^alias bios="systemctl reboot --firmware-setup"$/;"	a
+bios-version	aliases/.bash_aliases.d/general.sh	/^alias bios-version="sudo dmidecode -t 0"$/;"	a
 block_height	neofetch/.config/neofetch/config.conf	/^block_height=1$/;"	k
 block_range	neofetch/.config/neofetch/config.conf	/^block_range=(0 15)$/;"	k
 block_width	neofetch/.config/neofetch/config.conf	/^block_width=2$/;"	k
@@ -674,8 +675,7 @@ completions	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], 
 copy	aliases/.bash_aliases.d/general.sh	/^alias copy="cp"$/;"	a
 copy_sshfs	aliases/.bash_aliases.d/ssh.sh	/^copy_sshfs(){ cp -r --no-preserve=mode "$1" "$2"; }$/;"	f
 copy_to_serber	aliases/.bash_aliases.d/ssh.sh	/^copy_to_serber() { scp -r $user@$ip:$1 $2; }$/;"	f
-cp	aliases/.bash_aliases.d/general.sh	/^alias cp="cp -rv"$/;"	a
-cp	aliases/.bash_aliases.d/general.sh	/^alias cp="cp-trash -rv"$/;"	a
+cp	aliases/.bash_aliases.d/general.sh	/^alias cp="xcp --recursive --verbose  --no-clobber --glob --verbose --"$/;"	a
 cp-all-to	aliases/.bash_aliases.d/general.sh	/^function cp-all-to(){$/;"	f
 cp-old	aliases/.bash_aliases.d/general.sh	/^alias cp-old="cp -ruv"$/;"	a
 cp-trash	aliases/.bash_aliases.d/general.sh	/^function cp-trash(){$/;"	f
@@ -698,6 +698,7 @@ crop_offset	neofetch/.config/neofetch/config.conf	/^crop_offset="center"$/;"	k
 ctags	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vim-all": ["vim", "vim-alias", "vim-completion"]/;"	o
 ctags-force-sh	aliases/.bash_aliases.d/ctags.sh	/^alias ctags-force-sh="ctags --language-force=sh -R *"$/;"	a
 ctags-list-sh	aliases/.bash_aliases.d/ctags.sh	/^alias ctags-list-sh="ctags --list-kinds=sh"$/;"	a
+curl	aliases/.bash_aliases.d/check_system.sh	/^    alias curl='curl.exe' $/;"	a
 curl	checks/check_system.sh	/^    alias curl='curl.exe' $/;"	a
 curl	install_cygwin.sh	/^    alias curl='curl.exe' $/;"	a
 d	aliases/.bash_aliases.d/general.sh	/^alias d="dirs"$/;"	a
@@ -820,7 +821,9 @@ environment-variables_r	install_envvars.sh	/^environment-variables_r(){ $/;"	f
 envvars	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vim-all": ["vim", "vim-alias", "vim-completion"]/;"	o
 error-null	aliases/.bash_aliases.d/general.sh	/^alias error-null="2> \/dev\/null"$/;"	a
 escape_spaces	aliases/.bash_aliases.d/general.sh	/^function escape_spaces(){$/;"	f
+executable	aliases/.bash_aliases.d/general.sh	/^alias executable="sudo chmod +x"$/;"	a
 executable	ranger/.config/ranger/rifle.conf	/^mime application\/x-executable = "$1"$/;"	k
+executable-user	aliases/.bash_aliases.d/general.sh	/^alias executable-user="sudo chmod u+x"$/;"	a
 exiftool-add-cron-wipe-all-metadata-rec-dir	aliases/.bash_aliases.d/variety.sh	/^    function exiftool-add-cron-wipe-all-metadata-rec-dir(){$/;"	f
 exiftool-add-cron-wipe-all-metadata-rec-picture-dir	aliases/.bash_aliases.d/variety.sh	/^    alias exiftool-add-cron-wipe-all-metadata-rec-picture-dir="(crontab -l; echo '0,5,10,15,25,3/;"	a
 exiftool-folder	aliases/.bash_aliases.d/variety.sh	/^    alias exiftool-folder="exiftool -r -all= $(pwd)"$/;"	a
@@ -833,7 +836,7 @@ ext py	ranger/.config/ranger/rifle.conf	/^ext py  = python -- "$1"$/;"	k
 ext rb	ranger/.config/ranger/rifle.conf	/^ext rb  = ruby -- "$1"$/;"	k
 ext sh	ranger/.config/ranger/rifle.conf	/^ext sh  = sh -- "$1"$/;"	k
 extract-archive	aliases/.bash_aliases.d/general.sh	/^extract-archive(){  $/;"	f
-eza	aliases/.bash_aliases.d/general.sh	/^    alias eza="eza --color=always --header --icons" $/;"	a
+eza	aliases/.bash_aliases.d/general.sh	/^    alias eza="eza --color=always --header --icons always" $/;"	a
 eza-git	aliases/.bash_aliases.d/general.sh	/^    alias eza-git="eza --long --git-repos --header --git" $/;"	a
 fd	aliases/.bash_aliases.d/find.sh	/^type fd &> \/dev\/null && alias fd='fd --color=always'$/;"	a
 ferdium	aliases/.bash_aliases.d/flatpacks.sh	/^    alias ferdium='GDK_BACKEND=x11 \/usr\/bin\/flatpak run --branch=stable --arch=x86_64 --comma/;"	a
@@ -858,6 +861,9 @@ fzf-docker-new-container	fzf/.bash_aliases.d/docker.sh	/^fzf-docker-new-containe
 fzf-docker-open-container	fzf/.bash_aliases.d/docker.sh	/^fzf-docker-open-container(){ docker-fzf-open-container; }$/;"	f
 fzf-docker-show-ip-container	fzf/.bash_aliases.d/docker.sh	/^fzf-docker-show-ip-container(){ docker-fzf-show-ip-container; }$/;"	f
 fzf-docker-stop-container	fzf/.bash_aliases.d/docker.sh	/^fzf-docker-stop-container(){ docker-fzf-stop-container; }$/;"	f
+fzf-multi	aliases/.bash_aliases.d/fzf.sh	/^alias fzf-multi="fzf --multi"$/;"	a
+fzf-wait	aliases/.bash_aliases.d/fzf.sh	/^alias fzf-wait="fzf --sync"$/;"	a
+fzf_rifle	aliases/.bash_aliases.d/fzf-rifle.sh	/^fzf_rifle(){$/;"	f
 fzf_rifle	fzf/.bash_aliases.d/fzf-rifle.sh	/^fzf_rifle(){$/;"	f
 g:NERDTreeFileLines	vim/.config/nvim/init.vim	/^let g:NERDTreeFileLines = 1$/;"	v
 g:NERDTreeHijackNetrw	vim/.config/nvim/init.vim	/^let g:NERDTreeHijackNetrw = 0$/;"	v
@@ -904,10 +910,13 @@ git-config-global-pull-rebase-true	aliases/.bash_aliases.d/git.sh	/^alias git-co
 git-config-pull-fastforward-only	aliases/.bash_aliases.d/git.sh	/^alias git-config-pull-fastforward-only="git config --global pull.ff only"$/;"	a
 git-config-pull-rebase-false	aliases/.bash_aliases.d/git.sh	/^alias git-config-pull-rebase-false="git config pull.rebase false"$/;"	a
 git-config-pull-rebase-true	aliases/.bash_aliases.d/git.sh	/^alias git-config-pull-rebase-true="git config pull.rebase true"$/;"	a
+git-config-useremail	aliases/.bash_aliases.d/git.sh	/^alias git-config-useremail="git config user.email"$/;"	a
+git-config-username	aliases/.bash_aliases.d/git.sh	/^alias git-config-username="git config user.name"$/;"	a
 git-create-and-switch-branch	aliases/.bash_aliases.d/git.sh	/^alias git-create-and-switch-branch="git checkout -b - "$/;"	a
 git-delete-branch	aliases/.bash_aliases.d/git.sh	/^alias git-delete-branch="git branch -d - "$/;"	a
 git-https-to-ssh	aliases/.bash_aliases.d/git.sh	/^git-https-to-ssh(){$/;"	f
 git-list-branches	aliases/.bash_aliases.d/git.sh	/^alias git-list-branches="git branch --list -vv"$/;"	a
+git-list-config	aliases/.bash_aliases.d/git.sh	/^alias git-list-config="git config --list"$/;"	a
 git-list-remotes	aliases/.bash_aliases.d/git.sh	/^alias git-list-remotes="git remote -v"$/;"	a
 git-log-grep	aliases/.bash_aliases.d/git.sh	/^alias git-log-grep="git log -S "$/;"	a
 git-log-linerange	aliases/.bash_aliases.d/git.sh	/^alias git-log-linerange="git log -L "$/;"	a
@@ -1050,11 +1059,15 @@ keybinds-all	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"],
 keybinds-bash	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vim-all": ["vim", "vim-alias", "vim-completion"]/;"	o
 keyserver hkps	gpg/.gnupg/gpg.conf	/^keyserver hkps:\/\/api.protonmail.ch$/;"	k
 keyserver hkps	gpg/.gnupg/gpg.conf	/^keyserver hkps:\/\/keys.mailvelope.com$/;"	k
+kill-all-jobs	aliases/.bash_aliases.d/general.sh	/^alias kill-all-jobs="kill -9 \\$(jobs -p)"$/;"	a
 kill-signals	aliases/.bash_aliases.d/general.sh	/^alias kill-signals="kill -l"$/;"	a
 kitty	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vim-all": ["vim", "vim-alias", "vim-completion"]/;"	o
 kitty_conf	install_kitty.sh	/^    function kitty_conf(){$/;"	f
+kitty_remote_fix	aliases/.bash_aliases.d/kitty.sh	/^    alias kitty_remote_fix="sudo apt install kitty-terminfo"$/;"	a
+kitty_remote_fix	aliases/.bash_aliases.d/kitty.sh	/^    alias kitty_remote_fix="sudo pacman -S kitty-terminfo"$/;"	a
 kitty_remote_fix	kitty/.bash_aliases.d/kitty.sh	/^    alias kitty_remote_fix="sudo apt install kitty-terminfo"$/;"	a
 kitty_remote_fix	kitty/.bash_aliases.d/kitty.sh	/^    alias kitty_remote_fix="sudo pacman -S kitty-terminfo"$/;"	a
+kitty_remote_fix_alt	aliases/.bash_aliases.d/kitty.sh	/^alias kitty_remote_fix_alt="infocmp -a xterm-kitty | ssh funnyman@192.168.129.17 tic -x -o \\~\//;"	a
 kitty_remote_fix_alt	kitty/.bash_aliases.d/kitty.sh	/^alias kitty_remote_fix_alt="infocmp -a xterm-kitty | ssh funnyman@192.168.129.17 tic -x -o \\~\//;"	a
 label trash	ranger/.config/ranger/rifle.conf	/^label trash = mkdir -p -- ${XDG_DATA_DIR:-$HOME\/.ranger}\/ranger-trash; mv -- "$@" ${XDG_DATA_D/;"	k
 lazygit	aliases/.bash_aliases.d/variety.sh	/^    alias lazygit="copy-to run && lazygit"$/;"	a
@@ -1097,7 +1110,7 @@ localauth_conf_d	install_polkit_wheel.sh	/^    function localauth_conf_d(){$/;"	
 locales-list-enabled	aliases/.bash_aliases.d/general.sh	/^alias locales-list-enabled="locale -a"$/;"	a
 lower2upper	aliases/.bash_aliases.d/general.sh	/^alias lower2upper="tr '[:lower:]' '[:upper:]'"$/;"	a
 lowfi-play	aliases/.bash_aliases.d/variety.sh	/^    alias lowfi-play="lowfi play"$/;"	a
-ls	aliases/.bash_aliases.d/general.sh	/^alias ls="eza --header --color=always --icons"$/;"	a
+ls	aliases/.bash_aliases.d/general.sh	/^alias ls="ls --color=always"$/;"	a
 ls-all	aliases/.bash_aliases.d/general.sh	/^    alias ls-all="eza -A --long --git --header"$/;"	a
 ls-all	aliases/.bash_aliases.d/general.sh	/^alias ls-all="ls -Ahl"$/;"	a
 ls-dirs	aliases/.bash_aliases.d/general.sh	/^    alias ls-dirs="eza -A --only-dirs" $/;"	a
@@ -1180,6 +1193,8 @@ mkbz2	aliases/.bash_aliases.d/general.sh	/^alias mkbz2='tar -cvjf'$/;"	a
 mkdir	aliases/.bash_aliases.d/general.sh	/^alias mkdir="mkdir -pv"$/;"	a
 mkgz	aliases/.bash_aliases.d/general.sh	/^alias mkgz='tar -cvzf'$/;"	a
 mktar	aliases/.bash_aliases.d/general.sh	/^alias mktar='tar -cvf'$/;"	a
+mobo	aliases/.bash_aliases.d/general.sh	/^alias mobo="sudo dmidecode -t 1"$/;"	a
+motherboard	aliases/.bash_aliases.d/general.sh	/^alias motherboard="sudo dmidecode -t 1"$/;"	a
 move	aliases/.bash_aliases.d/general.sh	/^alias move="mv"$/;"	a
 move_sshfs	aliases/.bash_aliases.d/ssh.sh	/^move_sshfs(){ cp -r --no-preserve=mode "$1" "$2" && rmTrash "$1"; }$/;"	f
 mpc_args	neofetch/.config/neofetch/config.conf	/^mpc_args=()$/;"	k
@@ -1297,6 +1312,7 @@ ports-listen-tcp	aliases/.bash_aliases.d/variety.sh	/^    alias ports-listen-tcp
 position	ranger/.config/ranger/rc.conf	/^map I  eval fm.open_console('rename ' + fm.thisfile.relative_path.replace("%", "%%"), position=7/;"	k
 ppa_verification	aliases/.bash_aliases.d/package_managers.sh	/^            ppa_verification()$/;"	f
 ppa_verification	checks/check_system.sh	/^    ppa_verification()$/;"	f
+print-path-to-prompt	aliases/.bash_aliases.d/fzf-rifle.sh	/^function print-path-to-prompt(){$/;"	f
 print-path-to-prompt	aliases/.bash_aliases.d/general.sh	/^function print-path-to-prompt(){$/;"	f
 print-path-to-prompt	aliases/.bash_aliases.d/systemctl.sh	/^function print-path-to-prompt(){$/;"	f
 print-path-to-prompt	fzf/.bash_aliases.d/fzf-rifle.sh	/^function print-path-to-prompt(){$/;"	f
@@ -1414,7 +1430,6 @@ service-user-logs-boot-reverse	aliases/.bash_aliases.d/systemctl.sh	/^alias serv
 service-user-logs-live	aliases/.bash_aliases.d/systemctl.sh	/^alias service-user-logs-live="journalctl -xf"$/;"	a
 service-user-logs-reverse	aliases/.bash_aliases.d/systemctl.sh	/^alias service-user-logs-reverse="journalctl -xr"$/;"	a
 service-user-reloadall	aliases/.bash_aliases.d/systemctl.sh	/^alias service-user-reloadall="systemctl --user daemon-reload"$/;"	a
-set-user-executable	aliases/.bash_aliases.d/general.sh	/^function set-user-executable() {$/;"	f
 shell-keybinds	install.sh	/^shell-keybinds() {$/;"	f
 shell-keybinds_r	install.sh	/^shell-keybinds_r(){ $/;"	f
 shell_path	neofetch/.config/neofetch/config.conf	/^shell_path="off"$/;"	k
@@ -1449,6 +1464,7 @@ src	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vim-all
 src	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vim-all": ["vim", "vim-alias", "vim-completion"]/;"	a	object:vim-completion
 src	copy-to/confs.json	/^{"group": {"tmux-all": ["tmux", "tmux-alias"], "vim-all": ["vim", "vim-alias", "vim-completion"]/;"	a	object:xterm
 ssh	aliases/.bash_aliases.d/ssh.sh	/^[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"$/;"	a
+ssh-config	aliases/.bash_aliases.d/ssh.sh	/^alias ssh-config="$EDITOR ~\/.ssh\/config"$/;"	a
 ssh_key_and_add_to_agent_by_host	aliases/.bash_aliases.d/ssh.sh	/^ssh_key_and_add_to_agent_by_host() {$/;"	f
 ssh_r	install_aliases.sh	/^ssh_r(){ $/;"	f
 sshh	install_aliases.sh	/^sshh(){$/;"	f
@@ -1570,8 +1586,10 @@ vlc_folder	aliases/.bash_aliases.d/variety.sh	/^vlc_folder(){$/;"	f
 w	vim/.config/nvim/init.vim	/^vnoremap w iW$/;"	m
 weather	aliases/.bash_aliases.d/general.sh	/^alias weather="inxi -w"$/;"	a
 weather-full	aliases/.bash_aliases.d/general.sh	/^alias weather-full="curl wttr.in | $PAGER"$/;"	a
+wget	aliases/.bash_aliases.d/check_system.sh	/^    alias wget='wget.exe' $/;"	a
 wget	checks/check_system.sh	/^    alias wget='wget.exe' $/;"	a
 wget	install_cygwin.sh	/^    alias wget='wget.exe' $/;"	a
+where_cmd	aliases/.bash_aliases.d/check_system.sh	/^    function where_cmd() { $/;"	f
 where_cmd	checks/check_system.sh	/^    function where_cmd() { $/;"	f
 wick	aliases/.bash_aliases.d/variety.sh	/^alias wick="sudo wickrme --no-sandbox"$/;"	a
 wifi-disable	aliases/.bash_aliases.d/general.sh	/^    alias wifi-disable='nmcli radio wifi off'$/;"	a
