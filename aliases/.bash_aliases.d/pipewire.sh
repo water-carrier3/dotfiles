@@ -1,0 +1,1 @@
+../dotfiles/pipewire/.bash_aliases.d/pipewire.sh
